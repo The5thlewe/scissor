@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /dashboard
+Disallow: /analytics
+
+# Allow crawling of shortened links
+Allow: /*/
+
+Sitemap: https://your-domain.com/sitemap.xml
