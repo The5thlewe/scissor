@@ -130,7 +130,7 @@ export const createShortLink = mutation({
     return {
       id: urlId,
       slug,
-      shortUrl: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/${slug}`,
+      shortUrl: `${process.env.NEXT_PUBLIC_APP_URL || "https://scissor-cyan.vercel.app/"}/${slug}`,
       originalUrl: args.originalUrl,
     };
   },
