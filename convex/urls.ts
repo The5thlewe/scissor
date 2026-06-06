@@ -48,20 +48,22 @@ export const createShortLink = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    // Rate limiting: Check if user has created >10 links in last 24 hours
-    const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
-    const recentUrls = await ctx.db
-      .query("urls")
-      .filter((q) =>
-        q.and(
-          q.eq(q.field("userId"), ctx.db.normalizeId("users", identity.subject)),
-          q.gte(q.field("createdAt"), oneDayAgo)
-        )
-      )
-      .collect();
+    const userDoc = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .first();
 
-    if (recentUrls.length >= 100) {
-      throw new Error("Rate limit exceeded: Maximum 100 links per 24 hours");
+    if (userDoc) {
+      const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+      const recentUrls = await ctx.db
+        .query("urls")
+        .withIndex("by_userId", (q) => q.eq("userId", userDoc._id))
+        .filter((q) => q.gte(q.field("createdAt"), oneDayAgo))
+        .collect();
+
+      if (recentUrls.length >= 100) {
+        throw new Error("Rate limit exceeded: Maximum 100 links per 24 hours");
+      }
     }
 
     if (!isValidUrl(args.originalUrl)) {
@@ -98,15 +100,11 @@ export const createShortLink = mutation({
       slug = nanoid(7);
     }
 
-    const clerkId = identity.subject;
-    let userRecord = await ctx.db
-      .query("users")
-      .withIndex("by_clerkId", (q) => q.eq("clerkId", clerkId))
-      .first();
+    let userRecord = userDoc;
 
     if (!userRecord) {
       const userId = await ctx.db.insert("users", {
-        clerkId,
+        clerkId: identity.subject,
         email: identity.email || "",
         name: identity.name,
         createdAt: Date.now(),
