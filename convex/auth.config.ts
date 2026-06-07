@@ -1,8 +1,8 @@
 export default {
   providers: [
     {
-      domain: process.env.CLERK_JWT_ISSUER_DOMAIN!,
-      applicationID: "convex",
+      domain: "https://clerk.scissor-prod.com",
+      applicationID: "convex-production",
     },
   ],
 };
