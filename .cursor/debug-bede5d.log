@@ -1,1 +1,5 @@
 {"sessionId":"bede5d","runId":"pre-fix","hypothesisId":"H2","location":"src/app/[slug]/route.ts:env-check","message":"Redirect env resolution","data":{"hasSiteUrl":true,"hasCloudUrl":true,"resolvedSiteUrl":true},"timestamp":1780750039034}
+{"sessionId":"bede5d","runId":"pre-fix","hypothesisId":"H3","location":"src/components/ConvexClientProvider.tsx:init","message":"Convex client env check","data":{"hasConvexUrl":true},"timestamp":1780753731406}
+{"sessionId":"bede5d","runId":"pre-fix","hypothesisId":"H3","location":"src/components/ConvexClientProvider.tsx:init","message":"Convex client env check","data":{"hasConvexUrl":true},"timestamp":1780753739508}
+{"sessionId":"bede5d","runId":"pre-fix","hypothesisId":"H3","location":"src/components/ConvexClientProvider.tsx:init","message":"Convex client env check","data":{"hasConvexUrl":true},"timestamp":1780768267774}
+{"sessionId":"bede5d","runId":"pre-fix","hypothesisId":"H3","location":"src/components/ConvexClientProvider.tsx:init","message":"Convex client env check","data":{"hasConvexUrl":true},"timestamp":1780823634952}

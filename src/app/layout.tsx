@@ -15,7 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      signInFallbackRedirectUrl="/dashboard"
+      signUpFallbackRedirectUrl="/dashboard"
+    >
       <html lang="en" suppressHydrationWarning>
         <head>
           <link
@@ -39,8 +42,7 @@ export default function RootLayout({
                       className="text-blue-600 hover:underline"
                     >
                       Next.js
-                    </a>
-                    {" "}
+                    </a>{" "}
                     and{" "}
                     <a
                       href="https://convex.dev"
