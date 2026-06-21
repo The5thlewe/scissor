@@ -1,4 +1,4 @@
-import { appendFileSync, readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 
 for (const envFile of [".env.local", ".env.production.local", ".env"]) {
   if (!existsSync(envFile)) continue;
@@ -24,26 +24,6 @@ const recommended = [
 
 const missing = required.filter((key) => !process.env[key]);
 const missingRecommended = recommended.filter((key) => !process.env[key]);
-
-const logEntry = {
-  sessionId: "bede5d",
-  runId: process.env.VERCEL ? "vercel-build" : "local-build",
-  hypothesisId: "H1",
-  location: "scripts/check-deploy-env.mjs",
-  message: "Deploy env validation",
-  data: {
-    missingRequired: missing,
-    missingRecommended,
-    vercelEnv: Boolean(process.env.VERCEL),
-  },
-  timestamp: Date.now(),
-};
-
-try {
-  appendFileSync("debug-bede5d.log", `${JSON.stringify(logEntry)}\n`);
-} catch {
-  // debug log file may not exist in CI
-}
 
 if (missing.length > 0 && process.env.VERCEL) {
   console.error(

@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Scissor - Fast URL Shortener",
   description:
     "Shorten URLs instantly with custom slugs, QR codes, and real-time analytics.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -16,8 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
       signInFallbackRedirectUrl="/dashboard"
       signUpFallbackRedirectUrl="/dashboard"
+      afterSignOutUrl="/"
     >
       <html lang="en" suppressHydrationWarning>
         <head>

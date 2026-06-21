@@ -34,12 +34,20 @@ export default function Navbar() {
           {isSignedIn ? (
             <UserButton />
           ) : (
-            <Link
-              href="/sign-in"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
-            >
-              Sign In
-            </Link>
+            <>
+              <Link
+                href="/sign-in"
+                className="text-slate-700 hover:text-blue-600 font-medium transition"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/sign-up"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+              >
+                Sign Up
+              </Link>
+            </>
           )}
         </div>
       </div>
