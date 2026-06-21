@@ -7,6 +7,19 @@ export async function GET(
   const startTime = performance.now();
   const params = await props.params;
   const { slug } = params;
+
+  const reservedSlugs = new Set([
+    "sign-in",
+    "sign-up",
+    "dashboard",
+    "analytics",
+    "__clerk",
+    "api",
+  ]);
+  if (reservedSlugs.has(slug)) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   const convexSiteUrl =
     process.env.NEXT_PUBLIC_CONVEX_SITE_URL ||
     process.env.NEXT_PUBLIC_CONVEX_URL?.replace(".convex.cloud", ".convex.site");

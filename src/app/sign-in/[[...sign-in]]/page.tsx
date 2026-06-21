@@ -1,3 +1,5 @@
+"use client";
+
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
@@ -8,7 +10,6 @@ export default function SignInPage() {
         path="/sign-in"
         signUpUrl="/sign-up"
         fallbackRedirectUrl="/dashboard"
-        forceRedirectUrl="/dashboard"
       />
     </div>
   );
